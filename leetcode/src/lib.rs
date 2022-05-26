@@ -10,8 +10,6 @@ impl Solution {
     }
 
     pub fn problem_740(nums: Vec<i32>) -> i32 {
-        // as I need it to be sorted better to use this
-        // than a HashMap
         let (a, b) = nums
             .iter()
             .fold(BTreeMap::new(), |mut m, n| {
@@ -19,20 +17,10 @@ impl Solution {
                 m
             })
             .iter()
-            .fold(
-                (0, 0),
-                |(a, b), (k, v)| {
-                    if a == *k - 1 {
-                        (a, b)
-                    } else {
-                        (b, b + v)
-                    }
-                },
-            );
-
-        /*
-            @(3->1,5->2,7->1,8->1)
-        */
+            .fold((0, 0), |(a, b), (k, v)| match true {
+                _ if a == *k - 1 => (a, b),
+                _ => (b, b + v),
+            });
 
         a.max(b)
     }
