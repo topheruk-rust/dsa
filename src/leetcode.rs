@@ -39,7 +39,7 @@ impl Solution {
             s.chars()
                 .zip(t.chars())
                 .fold(hm::new(), |mut map, (x, y)| {
-                    *map.entry(x).or_insert(0) += 1; // a ? then +1 else 1
+                    *map.entry(x).or_insert(0) += 1;
                     *map.entry(y).or_insert(0) -= 1;
                     map
                 })
