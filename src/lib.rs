@@ -18,4 +18,11 @@ mod tests {
         let result = Solution::problem_242(s.to_string(), t.to_string());
         assert!(result)
     }
+
+    #[test]
+    fn problem_121() {
+        let input = vec![7, 6, 4, 3, 1];
+        let result = Solution::problem_121(input);
+        assert_eq!(result, 0)
+    }
 }

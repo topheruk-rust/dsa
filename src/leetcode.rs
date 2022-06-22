@@ -50,4 +50,17 @@ impl Solution {
             false
         }
     }
+
+    /// https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+    /// You want to maximize your profit by choosing a single
+    /// day to buy one stock and choosing a different day
+    /// in the future to sell that stock.
+    pub fn problem_121(prices: Vec<i32>) -> i32 {
+        prices
+            .iter()
+            .fold((i32::MAX, 0), |(buy, profit), sell| {
+                (buy.min(*sell), profit.max(sell - buy))
+            })
+            .1
+    }
 }
