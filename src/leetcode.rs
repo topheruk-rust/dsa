@@ -11,6 +11,7 @@ impl Solution {
             .enumerate()
             .fold((vec![], hm::new()), |(vec, mut map), (pos, val)| {
                 map.insert(val, pos as i32);
+                // map.entry(val).
                 match map.get(&(target - val)) {
                     Some(&pos_cached) => (vec![pos_cached, pos as i32], map),
                     None => (vec, map),
@@ -38,13 +39,13 @@ impl Solution {
         if s.len() == t.len() {
             s.chars()
                 .zip(t.chars())
-                .fold(hm::new(), |mut map, (x, y)| {
-                    *map.entry(x).or_insert(0) += 1;
-                    *map.entry(y).or_insert(0) -= 1;
+                .fold(hm::<char, i32>::new(), |mut map, (x, y)| {
+                    *map.entry(x).or_default() += 1;
+                    *map.entry(y).or_default() -= 1;
                     map
                 })
                 .values()
-                .any(|&x| x != 0)
+                .all(|&x| x == 0)
         } else {
             false
         }

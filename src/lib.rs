@@ -14,7 +14,7 @@ mod tests {
 
     #[test]
     fn problem_242() {
-        let (s, t) = ("apple", "ppla");
+        let (s, t) = ("cat", "tac");
         let result = Solution::problem_242(s.to_string(), t.to_string());
         assert!(result)
     }
