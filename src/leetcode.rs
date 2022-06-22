@@ -11,7 +11,6 @@ impl Solution {
             .enumerate()
             .fold((vec![], hm::new()), |(vec, mut map), (pos, val)| {
                 map.insert(val, pos as i32);
-                // map.entry(val).
                 match map.get(&(target - val)) {
                     Some(&pos_cached) => (vec![pos_cached, pos as i32], map),
                     None => (vec, map),
