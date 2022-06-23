@@ -75,6 +75,8 @@ impl Solution {
         // One loop: O(n)  Another loop: O(n)  Total -> O(2n). We remove the constant 2, so we have O(n).
         // In this case, we only ever traverse a given array twice. An array of a thousand elements is only two traversals.
         // If loops were nested, then we would make one extra traversal for every element in the array i.e. O(n*n).
+
+        // this would be an example of O(n*n) as I have nested looping
         let _slow = nums
             .iter()
             .enumerate()
@@ -85,24 +87,16 @@ impl Solution {
 
         use std::mem::replace;
 
-        let fast = nums
-            .iter()
-            .zip(
-                nums.iter()
-                    .rev()
-                    .scan(1, |acc, n| Some(replace(acc, *acc * n)))
-                    .collect::<Vec<_>>()
-                    .iter()
-                    .rev(),
-            )
-            .scan((1, 1), |(ml, _), (nl, nr)| {
-                Some((replace(ml, *ml * nl), *nr))
-            })
-            .collect::<Vec<(_, _)>>()
-            .iter()
-            .map(|(a, b)| a * b)
-            .collect::<Vec<_>>();
+        let prefixs = nums.iter().scan(1, |acc, n| Some(replace(acc, *acc * n)));
 
-        fast
+        let suffixs = nums
+            .iter()
+            .rev()
+            .scan(1, |acc, n| Some(replace(acc, *acc * n)))
+            .collect::<Vec<_>>()
+            .into_iter() // the eq. of using a `let` binding to create a longer lived value
+            .rev();
+
+        prefixs.zip(suffixs).map(|(a, b)| a * b).collect::<Vec<_>>()
     }
 }
