@@ -25,4 +25,11 @@ mod tests {
         let result = Solution::problem_121(input);
         assert_eq!(result, 0)
     }
+
+    #[test]
+    fn problem_238() {
+        let input = vec![1, 2, 3, 4];
+        let result = Solution::problem_238(input);
+        assert_eq!(result, vec![24, 12, 8, 6])
+    }
 }
